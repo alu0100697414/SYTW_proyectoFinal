@@ -10,7 +10,7 @@
     "node": "0.10.x",
     "npm": "1.4.x"
   },
-  
+
   "dependencies": {
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",
@@ -20,6 +20,8 @@
     "express-partials": "^0.3.0",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
-    "express-helpers": "*"
+    "express-helpers": "*",
+    "sequelize": "~1.7.0",
+    "sqlite3": "~2.2.0"
   }
 }
