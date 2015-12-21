@@ -3,7 +3,7 @@ var path = require('path');
 // Postgres URL: postgres://user:pass@host:port/database
 // Sqlite URL:   sqlite://@/:/
 
-var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\/(.*)/);
+var url = process.env.DATABASE_URL.match(/(.*)\:\/\/(.*?)\:(.*)@(.*)\:(.*)\/(.*)/);
 
 var DB_name = (url[6] || null);
 var user = (url[2] || null);
@@ -26,6 +26,8 @@ var sequelize = new Sequelize(DB_name, user, pwd, {
   storage: storage, // solo sqlite
   omitNull: true // solo postgres
 });
+
+console.log("eeeeeeeeeeeeeeoooooooooooooooooooo");
 
 // Importar la definicion de la tabla Quiz en quiz.js
 var Quiz = sequelize.import(path.join(__dirname,'quiz'));
