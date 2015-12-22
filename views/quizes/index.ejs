@@ -1,8 +1,9 @@
-<br>
-<table>
-  <% var i; for (i=0; i<quizes.length; i++){ %>
-    <tr><td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td></tr>
-  <% } %>
-</table>
-<br><br>
+<h3>Aquí puede ver todas las preguntas que se encontrará en el juego.</h3>
+
+<ul id="lista">
+<% for(var i=0; i<quizes.length; i++) {%>
+   <li><span>Pregunta <%= (i+1) %>: </span><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></li>
+<% } %>
+</ul>﻿
+
 <a href="/quizes/new"><button type="button">Crear nueva pregunta</button></a>
