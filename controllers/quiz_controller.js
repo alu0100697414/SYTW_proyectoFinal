@@ -61,3 +61,26 @@ exports.create = function(req,res){
 		res.render('quizes/new', {quiz: quiz, errors: err});
 	}
 };
+
+// GET /quizes/:id/edit
+exports.edit = function(req,res){
+  var quiz = req.quiz; // autoload de instanca de quiz
+
+  res.render('quizes/edit', {quiz: quiz, errors: []});
+};
+
+exports.update = function(req,res){
+  req.quiz.pregunta = req.body.quiz.pregunta;
+  req.quiz.respuesta = req.body.quiz.respuesta;
+
+  var err = models.Quiz.build(req.body.quiz).validate();
+
+	if(err === null){
+		req.quiz.save({ fields: ["pregunta", "respuesta"]}).then(function(){
+			res.redirect('/quizes');
+		}); //redireccionamos a la lista de preguntas
+	}
+	else {
+		res.render('quizes/edit', {quiz: quiz, errors: err});
+	}
+};

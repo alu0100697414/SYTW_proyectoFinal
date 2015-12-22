@@ -2,7 +2,10 @@
 
 <ul id="lista">
 <% for(var i=0; i<quizes.length; i++) {%>
-   <li><span>Pregunta <%= (i+1) %>: </span><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></li>
+   <li>
+     <a href="quizes/<%= quizes[i].id %>/edit"><button>Editar</button></a>
+     <span>Pregunta <%= (i+1) %>: </span><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a>
+   </li>
 <% } %>
 </ul>﻿
 
