@@ -35,3 +35,22 @@ exports.index = function(req,res) {
     res.render('quizes/index', {quizes: quizes});
   }).catch(function(error){ next(error); })
 };
+
+// GET /quizes/new
+exports.new = function(req,res){
+  var quiz = models.Quiz.build(
+    {pregunta: "Pregunta", respuesta: "Respuesta"}
+  );
+
+  res.render('quizes/new', {quiz: quiz});
+}
+
+// POST /quizes/create
+exports.create = function(req,res){
+  var quiz = models.Quiz.build( req.body.quiz );
+
+  //guarda en la BD los campos pregunt y respuesta del quiz
+  quiz.save({fields: ["pregunta", "respuesta"]}).then(function(){
+    res.redirect('/quizes');
+  }) // Redireccionamos a la lista de preguntas
+};
