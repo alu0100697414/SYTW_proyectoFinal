@@ -27,6 +27,14 @@
 
 
       <section class="main" id="s1">
+        <% if(errors["pregunta"]) { %>
+          <span class='ErrorMsgs'><%= errors["pregunta"] %></span>
+        <% } %>
+        <br>
+        <% if(errors["respuesta"]) { %>
+          <span class='ErrorMsgs'><%= errors["respuesta"] %></span>
+        <% } %>
+
         <%- body %>
       </section>
 
