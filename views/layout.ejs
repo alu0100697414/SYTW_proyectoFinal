@@ -7,7 +7,7 @@
     <title>QuizULL</title>
 
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' type='text/css' media='(min-width: 800px)' href='/stylesheets/wide.css' />
+    <link rel='stylesheet' type='text/css' media='(min-width: 950px)' href='/stylesheets/wide.css' />
     <link rel='stylesheet' type='text/css' media='(max-width: 480px)' href='/stylesheets/smartphone.css' />
   </head>
 
@@ -21,7 +21,16 @@
 
 
       <nav class="main" id="n1" role="navigation">
+        <% if(!session.user){ %>
+          <span class="right"><a href="/login" style="display:inline;">Iniciar sesión</a></span>
+        <% } else { %>
+          <span class="right"> <%=session.user.username%>
+          <br>
+          <a href="/logout" style="display:inline;">Cerrar sesión</a></span>
+        <% } %>
+        <br>
         <span><a href="/">Inicio</a></span>
+        <br>
         <span><a href="/quizes">Preguntas</a></span>
       </nav>
 
