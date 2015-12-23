@@ -1,5 +1,5 @@
 h1 span { display: none; }
 body { font-size: xx-large; }
 input { font-size: large; }
-#s1 { text-align: center; }
+#s1 { text-align: left; font-size: medium; }
 #s1 span { display: none; }
