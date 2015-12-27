@@ -10,6 +10,11 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Quiz', errors: [] });
 });
 
+// GET Instrucciones.
+router.get('/instructions', function(req, res, next) {
+  res.render('instructions', { errors: [] });
+});
+
 // Definición de rutas de sesion
 router.get('/login',  sessionController.new);     // formulario login
 router.post('/login', sessionController.create);  // crear sesión
