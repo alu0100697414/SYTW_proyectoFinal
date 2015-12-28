@@ -28,6 +28,8 @@ router.param('commentId', commentController.load);  // autoload :commentId
 router.get('/quizes', quizController.index);
 router.get('/quizes/:quizId(\\d+)', quizController.show);
 router.get('/quizes/:quizId(\\d+)/answer', quizController.answer);
+router.get('/game', quizController.gameQ);
+router.get('/game/:quizId(\\d+)/answer', quizController.gameA);
 router.get('/quizes/new', 				   sessionController.loginRequired, quizController.new);
 router.post('/quizes/create',              sessionController.loginRequired, quizController.create);
 router.get('/quizes/:quizId(\\d+)/edit',   sessionController.loginRequired, quizController.edit);

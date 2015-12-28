@@ -14,6 +14,26 @@ exports.load = function(req,res,next,quizId){
   ).catch(function(error){ next(error) });
 };
 
+// GET /game
+exports.gameQ = function(req,res) {
+  models.Quiz.count().then(function(count) { // Cuento el numero de filas en la tabla
+    var index = Math.floor((Math.random() * count) + 1); // Numero aleatorio
+
+    models.Quiz.find(index).then(function(project) {
+      res.render('quizes/game_q', {quiz: project, index: index, errors: []});
+    })
+  })
+};
+
+// GET /game/:id/answer
+exports.gameA = function(req,res) {
+  var resultado = 'Incorrecto';
+  if(req.query.respuesta === req.quiz.respuesta){
+    resultado = 'Correcto';
+  }
+  res.render('quizes/game_a', {quiz: req.quiz, respuesta: resultado, errors: []});
+};
+
 // GET /quizes/:id
 exports.show = function(req,res) {
   res.render('quizes/show', {quiz: req.quiz, errors: []});
