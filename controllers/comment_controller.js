@@ -11,6 +11,7 @@ exports.ownership = function(req, res, next){
 
       console.log(objQuizOwner, logUser, isAdmin);
 
+      // Si fue el admin o el usuario quien lo creó
       if (isAdmin || objQuizOwner === logUser) {
         next();
       } else {
@@ -22,11 +23,7 @@ exports.ownership = function(req, res, next){
 
 // Autoload :id de comentarios
 exports.load = function(req, res, next, commentId) {
-  models.Comment.find({
-    where: {
-      id: Number(commentId)
-    }
-  }).then(function(comment) {
+  models.Comment.find({ where: { id: Number(commentId)}}).then(function(comment) {
     if (comment) {
       req.comment = comment;
       next();
@@ -65,5 +62,4 @@ exports.publish = function(req, res) {
   req.comment.save( {fields: ["publicado"]})
     .then( function(){ res.redirect('/quizes/'+req.params.quizId);} )
     .catch(function(error){next(error)});
-
 };

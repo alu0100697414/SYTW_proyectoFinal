@@ -145,4 +145,4 @@ exports.perfil = function(req, res) {
   models.Quiz.findAll(options).then(function(quizes) {
     res.render('quizes/perfil', {quizes: quizes, errors: []});
   }).catch(function(error){next(error)});
- };
+};
