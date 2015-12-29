@@ -13,6 +13,16 @@ module.exports = function(sequelize, DataTypes) {
       validate: { notEmpty: {msg: "~ Falta la contraseña."}}
     },
 
+    qAcertadas: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+
+    qFalladas: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+
     isAdmin: {
       type: DataTypes.BOOLEAN,
       defaultValue: false

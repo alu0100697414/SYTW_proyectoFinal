@@ -16,3 +16,29 @@
   </li>
 <% } %>
 </ul>﻿
+
+<h2>Estadísticas de juego.</h2>
+
+<strong>Preguntas jugadas: </strong><%= session.user.qAcertadas + session.user.qFalladas %>
+<br>
+<strong>Acertadas: </strong><%= session.user.qAcertadas %>
+<br>
+<strong>Falladas: </strong><%= session.user.qFalladas %>
+<br><br>
+
+<% if((session.user.qAcertadas + session.user.qFalladas) !== 0){ %>
+<% var total = ((session.user.qAcertadas/(session.user.qAcertadas + session.user.qFalladas))*100).toFixed(1) %>
+  <strong>Porcentaje acertadas: </strong><%= total %>%
+  <br>
+<% } else { %>
+  <strong>Porcentaje acertadas: </strong>0%
+  <br>
+<% } %>
+<% if((session.user.qAcertadas + session.user.qFalladas) !== 0){ %>
+  <% var total = ((session.user.qFalladas/(session.user.qAcertadas + session.user.qFalladas))*100).toFixed(1) %>
+  <strong>Porcentaje falladas: </strong><%= total %>%
+  <br>
+<% } else { %>
+  <strong>Porcentaje falladas: </strong>0%
+  <br>
+<% } %>

@@ -42,11 +42,22 @@ exports.gameQ = function(req,res) {
 
 // GET /game/:id/answer
 exports.gameA = function(req,res) {
-  var resultado = 'Incorrecto';
-  if(req.query.respuesta.toUpperCase() === req.quiz.respuesta){
-    resultado = 'Correcto';
+  if(!req.session.user){
+    var resultado = 'Incorrecto';
+    if(req.query.respuesta.toUpperCase() === req.quiz.respuesta){
+      resultado = 'Correcto';
+    }
+    res.render('quizes/game_a', {quiz: req.quiz, respuesta: resultado, errors: []});
   }
-  res.render('quizes/game_a', {quiz: req.quiz, respuesta: resultado, errors: []});
+  else {
+    if(req.query.respuesta.toUpperCase() === req.quiz.respuesta){
+      req.session.user.qAcertadas = req.session.user.qAcertadas + 1;
+      res.render('quizes/game_a', {quiz: req.quiz, respuesta: 'Correcto', errors: []});
+    } else {
+      req.session.user.qFalladas = req.session.user.qFalladas + 1;
+      res.render('quizes/game_a', {quiz: req.quiz, respuesta: 'Incorrecto', errors: []});
+    }
+  }
 };
 
 // GET /quizes/:id
