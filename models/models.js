@@ -57,7 +57,8 @@ sequelize.sync({ force: true }).then(function() {
     if(count === 0) {   // la tabla se inicializa solo si está vacía
       User.bulkCreate( // bulkCreate es lo mismo que usar varios Create
         [ {username: 'admin',   password: '1234', isAdmin: true},
-          {username: 'pepe',   password: '5678'} // el valor por defecto de isAdmin es 'false'
+          {username: 'pepe',   password: '5678'}, // el valor por defecto de isAdmin es 'false'
+          {username: 'pepa',   password: '5678'}
         ]
       ).then(function(){console.log('Base de datos (tabla user) inicializada');});
     }
@@ -67,7 +68,12 @@ sequelize.sync({ force: true }).then(function() {
     if(count === 0) {   // la tabla se inicializa solo si está vacía
       Quiz.bulkCreate(
         [ {pregunta: '¿Capital de Italia?',   respuesta: 'Roma', UserId: 1}, // Esta pregunta pertenece a admin
-          {pregunta: '¿Capital de Portugal?', respuesta: 'Lisboa', UserId: 2} // Esta pregunta pertenece a pepe
+          {pregunta: '¿Capital de Portugal?', respuesta: 'Lisboa', UserId: 2}, // Esta pregunta pertenece a pepe
+          {pregunta: '¿Capital de España?',   respuesta: 'Madrid', UserId: 2},
+          {pregunta: '¿Isla de mayor extensión en Canarias?',   respuesta: 'Tenerife', UserId: 1},
+          {pregunta: '¿Quién marcó el gol del primer Mundial de fútbol español?',   respuesta: 'Iniesta', UserId: 2},
+          {pregunta: 'Completa el nombre de la película: El señor de los...',   respuesta: 'anillos', UserId: 2},
+          {pregunta: '¿Cuál es el animal que en su nombre tiene las cinco vocales?',   respuesta: 'Murciélago', UserId: 1}
         ]
       ).then(function(){console.log('Base de datos (tabla quiz) inicializada')});
     };
