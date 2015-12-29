@@ -19,6 +19,7 @@ exports.load = function(req,res,next,quizId){
   models.Quiz.find({ where: { id:Number(quizId) }, include:[{ model: models.Comment }]}).then(function(quiz){
       if(quiz){
         req.quiz = quiz;
+        req.quiz.respuesta = req.quiz.respuesta.toUpperCase();
         next();
       }
       else {
@@ -42,7 +43,7 @@ exports.gameQ = function(req,res) {
 // GET /game/:id/answer
 exports.gameA = function(req,res) {
   var resultado = 'Incorrecto';
-  if(req.query.respuesta === req.quiz.respuesta){
+  if(req.query.respuesta.toUpperCase() === req.quiz.respuesta){
     resultado = 'Correcto';
   }
   res.render('quizes/game_a', {quiz: req.quiz, respuesta: resultado, errors: []});
@@ -56,7 +57,7 @@ exports.show = function(req,res) {
 // GET /quizes/:id/answer
 exports.answer = function(req, res) {
   var resultado = 'Incorrecto';
-  if(req.query.respuesta === req.quiz.respuesta){
+  if(req.query.respuesta.toUpperCase() === req.quiz.respuesta){
     resultado = 'Correcto';
   }
   res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado, errors: []});
