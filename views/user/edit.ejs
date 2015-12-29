@@ -1,7 +1,12 @@
 <h2>Edita la información de la cuenta:</h2>
 
 <form method="post" action="/user/<%= user.id %>?_method=put" >
-  <% include _form.ejs %>
+  <label for="resp" class="rem">Contraseña:</label>
+  <br>
+  <input type="password" id="pass" name="user[password]"/> <p>
+
+  <input type="submit" value="Enviar">
+  <a href="/"><button type="button">Cancelar</button></a>
 </form>
 
 <form method="post" action="/user/<%= user.id %>?_method=delete">
