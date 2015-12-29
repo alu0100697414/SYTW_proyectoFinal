@@ -28,6 +28,8 @@
         <% } else { %>
           <span class="right"> <%=session.user.username%>
           <br>
+          <span><a href="/user/<%=session.user.id%>/perfil">Perfil</a></span>
+          <br>
           <a href="/user/<%=session.user.id%>/edit">Configuración</a>
           <br>
           <a href="/logout">Cerrar sesión</a></span>
