@@ -51,7 +51,7 @@ exports.Comment = Comment;
 exports.User = User;
 
 // sequelize.sync() inicializa la tabla de preguntas en la DB
-sequelize.sync().then(function() {
+sequelize.sync({ force: true }).then(function() {
   // then(..) ejecuta el manejador una vez creada la tabla
   User.count().then(function (count){
     if(count === 0) {   // la tabla se inicializa solo si está vacía
@@ -72,8 +72,4 @@ sequelize.sync().then(function() {
       ).then(function(){console.log('Base de datos (tabla quiz) inicializada')});
     };
   });
-
-  Quiz.count().then(function (count){
-    console.log("Numero: " + count);
-  })
 });

@@ -22,11 +22,15 @@
 
       <nav class="main" id="n1" role="navigation">
         <% if(!session.user){ %>
-          <span class="right"><a href="/login" style="display:inline;">Iniciar sesión</a></span>
+          <span class="right"><a href="/user">Registrarse</a>
+          <br>
+          <a href="/login">Iniciar sesión</a></span>
         <% } else { %>
           <span class="right"> <%=session.user.username%>
           <br>
-          <a href="/logout" style="display:inline;">Cerrar sesión</a></span>
+          <a href="/user/<%=session.user.id%>/edit">Configuración</a>
+          <br>
+          <a href="/logout">Cerrar sesión</a></span>
         <% } %>
         <br><br>
         <span><a href="/">Inicio</a></span>
