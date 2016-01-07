@@ -28,7 +28,7 @@ exports.load = function(req, res, next, userId) {
 exports.autenticar = function(login, password, callback) {
 	models.User.find({ where: { username: login }}).then(function(user) {
     if (user) {
-    	if(user.password ===password){
+    	if(user.password === password){
         callback(null, user);
       }
       else { callback(new Error('Contraseña errónea.')); }
@@ -61,7 +61,7 @@ exports.create = function(req, res) {
     	.save({fields: ["username", "password"]})
       .then( function(){
         // crea la sesión para que el usuario acceda ya autenticado y redirige a /
-        req.session.user = {id:user.id, username:user.username};
+        req.session.user = {id:user.id, username:user.username, qAcertadas:user.qAcertadas, qFalladas:user.qFalladas, isAdmin:user.isAdmin};
         res.redirect('/');
       });
     }
