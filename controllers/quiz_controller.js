@@ -29,7 +29,7 @@ exports.load = function(req,res,next,quizId){
   ).catch(function(error){ next(error) });
 };
 
-// GET /game
+// GET /game  Pregunta aleatoria
 exports.gameQ = function(req,res) {
   models.Quiz.count().then(function(count) { // Cuento el numero de filas en la tabla
     var index = Math.floor((Math.random() * count) + 1); // Numero aleatorio
@@ -40,7 +40,7 @@ exports.gameQ = function(req,res) {
   })
 };
 
-// GET /game/:id/answer
+// GET /game/:id/  Respuesta a pregunta aleatoria
 exports.gameA = function(req,res) {
   if(!req.session.user){
     var resultado = 'Incorrecto';
@@ -60,12 +60,12 @@ exports.gameA = function(req,res) {
   }
 };
 
-// GET /quizes/:id
+// GET /quizes/:id  Muestra pregunta
 exports.show = function(req,res) {
   res.render('quizes/show', {quiz: req.quiz, errors: []});
 };
 
-// GET /quizes/:id/answer
+// GET /quizes/:id/answer  Respuesta a la pregunta
 exports.answer = function(req, res) {
   var resultado = 'Incorrecto';
   if(req.query.respuesta.toUpperCase() === req.quiz.respuesta){
@@ -74,14 +74,14 @@ exports.answer = function(req, res) {
   res.render('quizes/answer', {quiz: req.quiz, respuesta: resultado, errors: []});
 };
 
-// GET /quizes
+// GET /quizes  Lista las preguntas
 exports.index = function(req,res) {
   models.Quiz.findAll().then(function(quizes){
     res.render('quizes/index', {quizes: quizes, errors: []});
   })
 };
 
-// GET /quizes/new
+// GET /quizes/new  Crear nueva pregunta
 exports.new = function(req,res){
   var quiz = models.Quiz.build(
     {pregunta: "Pregunta", respuesta: "Respuesta"}
@@ -90,7 +90,7 @@ exports.new = function(req,res){
   res.render('quizes/new', {quiz: quiz, errors: []});
 }
 
-// POST /quizes/create
+// POST /quizes/create  Crea nueva pregunta
 exports.create = function(req,res){
   req.body.quiz.UserId = req.session.user.id;
   var quiz = models.Quiz.build( req.body.quiz );
@@ -107,13 +107,15 @@ exports.create = function(req,res){
   );
 };
 
-// GET /quizes/:id/edit
+// GET /quizes/:id/edit  Edita la pregunta
 exports.edit = function(req,res){
   var quiz = req.quiz; // autoload de instanca de quiz
 
   res.render('quizes/edit', {quiz: quiz, errors: []});
 };
 
+
+// Actualiza pregunta
 exports.update = function(req,res){
   req.quiz.pregunta = req.body.quiz.pregunta;
   req.quiz.respuesta = req.body.quiz.respuesta;
@@ -128,14 +130,14 @@ exports.update = function(req,res){
   });
 };
 
-// DELETE /quizes/:id
+// DELETE /quizes/:id  Elimina pregunta
 exports.destroy = function(req,res){
   req.quiz.destroy().then(function(){
     res.redirect('/quizes');
   }).catch(function(error){ next(error) });
 };
 
-// GET /users/:userId/perfil
+// GET /users/:userId/perfil  Perfil del usuario
 exports.perfil = function(req, res) {
   var options = {};
   if(req.user){

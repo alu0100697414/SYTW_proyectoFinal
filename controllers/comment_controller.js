@@ -31,12 +31,12 @@ exports.load = function(req, res, next, commentId) {
   }).catch(function(error){next(error)});
 };
 
-// GET /quizes/:quizId/comments/new
+// GET /quizes/:quizId/comments/new  Crear comentario
 exports.new = function(req, res) {
   res.render('comments/new.ejs', {quizid: req.params.quizId, errors: []});
 };
 
-// POST /quizes/:quizId/comments
+// POST /quizes/:quizId/comments  Crea comentario
 exports.create = function(req, res) {
   var comment = models.Comment.build({
     texto: req.body.comment.texto,
@@ -55,7 +55,7 @@ exports.create = function(req, res) {
 
 };
 
-// GET /quizes/:quizId/comments/:commentId/publish
+// GET /quizes/:quizId/comments/:commentId/publish  Publicar comentario
 exports.publish = function(req, res) {
   req.comment.publicado = true;
 

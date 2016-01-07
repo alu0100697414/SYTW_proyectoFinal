@@ -1,6 +1,7 @@
 var models = require('../models/models.js');
 
-// MW que permite acciones solamente si el usuario objeto corresponde con el usuario logeado o si es cuenta admin
+// MW que permite acciones solamente si el usuario objeto corresponde
+// con el usuario logeado o si es cuenta admin
 exports.ownership = function(req, res, next){
   var objUser = req.user.id;
   var logUser = req.session.user.id;
@@ -36,12 +37,12 @@ exports.autenticar = function(login, password, callback) {
   }).catch(function(error){callback(error)});
 };
 
-// GET /user/:id/edit
+// GET /user/:id/edit  Edita pass o elimina cuenta
 exports.edit = function(req, res) {
   res.render('user/edit', { user: req.user, errors: []});
 };  // req.user: instancia de user cargada con autoload
 
-// GET /user
+// GET /user  Nuevo usuario
 exports.new = function(req, res) {
   var user = models.User.build( // crea objeto user
     {username: "", password: ""}
@@ -49,7 +50,7 @@ exports.new = function(req, res) {
   res.render('user/new', {user: user, errors: []});
 };
 
-// POST /user
+// POST /user  Crea nuevo usuario
 exports.create = function(req, res) {
   var user = models.User.build( req.body.user );
 
@@ -68,7 +69,7 @@ exports.create = function(req, res) {
   }).catch(function(error){next(error)});
 };
 
-// PUT /user/:id
+// PUT /user/:id  Actualiza usuario
 exports.update = function(req, res, next) {
   req.user.username  = req.body.user.username;
   req.user.password  = req.body.user.password;
@@ -84,7 +85,7 @@ exports.update = function(req, res, next) {
   }).catch(function(error){next(error)});
 };
 
-// DELETE /user/:id
+// DELETE /user/:id  Elimina usuario
 exports.destroy = function(req, res) {
   req.user.destroy().then( function() {
     // borra la sesión y redirige a /
